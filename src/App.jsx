@@ -1,6 +1,7 @@
 import { Canvas } from '@react-three/fiber'
 import './App.css'
-import GrassRow from './paths/Grass.jsx';
+import Chicken from './components/models/Chicken.jsx'
+import GrassRow from './components/paths/Grass.jsx';
 
 export default () => {
     // Function to generate rows of grass
@@ -29,11 +30,12 @@ export default () => {
                     zoom: 80,
                     near: 0.1,
                     far: 100,
-                    position: [4, 5, 10]
+                    position: [3, 5, 10]
                 }}
             >
                 <ambientLight intensity={3} />
                 <pointLight position={[10, 10, 10]} />
+                <Chicken position={[0, -1, 2]} />
                 <mesh position={[0, -1, 2]}>
                     <boxGeometry args={[1, 0.2, 1]} />
                     <meshStandardMaterial color="#5F9E3F" />
