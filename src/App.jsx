@@ -4,6 +4,7 @@ import { KeyboardControls } from '@react-three/drei'
 import Controls from './Controls.jsx'
 import GameController from './GameController.jsx'
 import './App.css'
+import { CAMERA_POSITION_X, CAMERA_POSITION_Y, CAMERA_POSITION_Z } from './Constants.jsx'
 
 export default () => {
     const map = useMemo(() => [
@@ -22,7 +23,7 @@ export default () => {
                     zoom: 80,
                     near: 0.1,
                     far: 100,
-                    position: [4, 10, 15]
+                    position: [CAMERA_POSITION_X, CAMERA_POSITION_Y, CAMERA_POSITION_Z]
                 }}
             >
                 <ambientLight intensity={3} />
