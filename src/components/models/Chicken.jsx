@@ -17,10 +17,10 @@ export default (props) => {
   const { actions } = useAnimations(animations, group)
 
   return (
-    <group ref={group} {...props} rotation={[0, Math.PI / -2, 0]} dispose={null}>
+    <group ref={group} {...props} dispose={null}>
       <group name="Sketchfab_Scene">
         <group name="GLTF_SceneRootNode">
-          <group name="Chicken_28" position={[0, 0.15, 0]}>
+          <group name="Chicken_28" position={[0, 0.125, 0]} rotation={[0, Math.PI / -2, 0]}>
             <group name="GLTF_created_0">
               <primitive object={nodes.GLTF_created_0_rootJoint} />
               <skinnedMesh name="Object_7" geometry={nodes.Object_7.geometry} material={materials.blanc} skeleton={nodes.Object_7.skeleton} />
