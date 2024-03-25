@@ -6,7 +6,7 @@ import Chicken from "./components/models/Chicken"
 import Grass from './components/paths/Grass.jsx'
 import { CAMERA_POSITION_X, CAMERA_POSITION_Y, CAMERA_POSITION_Z } from './Constants.jsx'
 import Road from './components/paths/Road.jsx'
-import { generateLanes } from './LaneGeneration.jsx'
+import { generateLanes, nextLane } from './LaneGeneration.jsx'
 import Track from './components/paths/Track.jsx'
 import Water from './components/paths/Water.jsx'
 
@@ -14,14 +14,20 @@ const initialLanes = ['grass', 'grass', 'road', 'grass', 'grass', 'road', 'road'
 
 export default () => {
     const [lanes, setLanes] = useState([])
+    const [lane, setLane] = useState(0)
     const chicken = useRef()
-    const lane = useRef(0) // tracks the current lane of the chicken
 
     // create initial lanes
     useEffect(() => {
         const arr = generateLanes(20)
         setLanes(arr)
     }, [])
+
+    useEffect(() => {
+        if(lanes.length - 20 < lane){
+            setLanes(prev => [...prev, nextLane(prev)])
+        }
+    }, [lane])
 
     // keyboard handler
     useEffect(() => {
@@ -30,12 +36,12 @@ export default () => {
                 case 38: // up arrow
                     chicken.current.rotation.y = 0
                     chicken.current.position.z -= 1
-                    lane.current += 1
+                    setLane(prev => prev += 1)
                     break;
                 case 40: // down arrow
                     chicken.current.rotation.y = Math.PI
                     chicken.current.position.z += 1
-                    lane.current -= 1
+                    setLane(prev => prev -= 1)
                     break;
                 case 37: // left arrow
                     chicken.current.rotation.y = Math.PI / 2
