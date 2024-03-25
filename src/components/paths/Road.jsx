@@ -1,19 +1,19 @@
 export default ({ row }) => {
-    const grassElements = []
+    const roadElements = []
 
     for (let i = -20; i <= 20; i++) {
         const position = [i, 0, -row]
-        grassElements.push(
+        roadElements.push(
             <mesh key={i} position={position}>
                 <boxGeometry args={[1, 0.2, 1]} />
-                <meshStandardMaterial color="#5F9E3F" />
+                <meshStandardMaterial color="#495057" />
             </mesh>
         )
     }
 
     return (
         <group>
-            {grassElements}
+            {roadElements}
         </group>
     )
 }
