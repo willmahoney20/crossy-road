@@ -17,10 +17,10 @@ export const nextLane = lanes => {
     let probabilities = []
     switch (prev_lane) {
         case 'grass':
-            probabilities = [0.4, 0.4, 0.1, 0.1]
+            probabilities = [0.35, 0.35, 0.1, 0.2]
             break;
         case 'road':
-            probabilities = [0.3, 0.55, 0.15, 0]
+            probabilities = [0.25, 0.45, 0.2, 0.1]
             break;
         case 'track':
             probabilities = [0.4, 0.4, 0.2, 0]

@@ -8,6 +8,7 @@ import { CAMERA_POSITION_X, CAMERA_POSITION_Y, CAMERA_POSITION_Z } from './Const
 import Road from './components/paths/Road.jsx'
 import { generateLanes } from './LaneGeneration.jsx'
 import Track from './components/paths/Track.jsx'
+import Water from './components/paths/Water.jsx'
 
 const initialLanes = ['grass', 'grass', 'road', 'grass', 'grass', 'road', 'road', 'grass', 'grass', 'road', 'road', 'grass', 'grass', 'grass', 'grass', 'grass']
 
@@ -84,7 +85,9 @@ export default () => {
                 lane === 'road' ?
                 <Road key={index} row={index} prev={lanes[index - 1]} /> :
                 lane === 'track' ?
-                <Track key={index} row={index} />
+                <Track key={index} row={index} /> :
+                lane === 'water' ?
+                <Water key={index} row={index} />
                 : null
             })}
         </group>
