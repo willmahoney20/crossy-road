@@ -6,19 +6,18 @@ import Chicken from "./components/models/Chicken"
 import Grass from './components/paths/Grass.jsx'
 import { CAMERA_POSITION_X, CAMERA_POSITION_Y, CAMERA_POSITION_Z } from './Constants.jsx'
 import Road from './components/paths/Road.jsx'
+import { generateLanes } from './LaneGeneration.jsx'
+
+const initialLanes = ['grass', 'grass', 'road', 'grass', 'grass', 'road', 'road', 'grass', 'grass', 'road', 'road', 'grass', 'grass', 'grass', 'grass', 'grass']
 
 export default () => {
-    const upPressed = useKeyboardControls((state) => state[Controls.up])
     const [lanes, setLanes] = useState([])
     const chicken = useRef()
     const lane = useRef(0) // tracks the current lane of the chicken
 
     // create initial lanes
     useEffect(() => {
-        let arr = []
-        for(let i = 0; i < 6; i++){
-            Math.random() < 0.4 ? arr.push('road') : arr.push('grass')
-        }
+        const arr = generateLanes(20)
         setLanes(arr)
     }, [])
 
@@ -70,12 +69,19 @@ export default () => {
                 <Chicken />
             </group>
 
+            {initialLanes.map((lane, index) => {
+                return lane === 'grass' ?
+                <Grass key={index} row={-index} /> :
+                lane === 'road' ?
+                <Road key={index} row={-index} />
+                : null
+            })}
+
             {lanes.map((lane, index) => {
-                console.log('find', lane)
                 return lane === 'grass' ?
                 <Grass key={index} row={index} /> :
                 lane === 'road' ?
-                <Road key={index} row={index} />
+                <Road key={index} row={index} prev={lanes[index - 1]} />
                 : null
             })}
         </group>
